@@ -1,0 +1,4 @@
+1.  4 gates for one-bit  20 gates for five-bit, 4*n for n-bitand
+2.  5*8=40 gates for 8-bit ripple-carry, 5*12 + 4 * 2 = 68 gates for carry-select
+3.  8A, 4A + M (+ multiplexer time)
+4.  2.5 hours for all

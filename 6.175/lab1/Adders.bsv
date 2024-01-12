@@ -11,9 +11,17 @@ function Bit#(1) fa_carry( Bit#(1) a, Bit#(1) b, Bit#(1) c_in );
 endfunction
 
 // 4 Bit full adder
-
+// EXE4
 function Bit#(5) add4( Bit#(4) a, Bit#(4) b, Bit#(1) c_in );
-    return 0;
+    Bit#(4) res;
+    Bit#(1) c_out = c_in;
+
+    for (Integer i = 0; i < 4; i = i + 1) begin
+        res[i] = fa_sum(a[i],b[i],c_out);
+        c_out = fa_carry(a[i],b[i],c_out);
+    end
+
+    return {c_out,res};
 endfunction
 
 // Adder interface
@@ -34,9 +42,17 @@ module mkRCAdder( Adder8 );
 endmodule
 
 // CS = Carry Select
+// EXE 5 
 module mkCSAdder( Adder8 );
     method ActionValue#( Bit#(9) ) sum( Bit#(8) a, Bit#(8) b, Bit#(1) c_in );
-        return 0;
+        Bit#(5) lower_result = add4(a[3:0], b[3:0], c_in);
+        Bit#(5) tmp_mid_result = add4(a[7:4], b[7:4], 0);
+        Bit#(5) tmp_upper_result = add4(a[7:4], b[7:4], 1);
+
+        Bit#(1) c_out = multiplexer_n(lower_result[4],tmp_mid_result[4],tmp_upper_result[4]);
+        Bit#(4) upper_result = multiplexer_n(lower_result[4],tmp_mid_result[3:0], tmp_upper_result[3:0]);
+
+        return {c_out,upper_result,lower_result[3:0]};
     endmethod
 endmodule
 
