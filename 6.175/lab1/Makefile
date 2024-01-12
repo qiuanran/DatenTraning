@@ -3,37 +3,27 @@ compile:
 	bsc -u -sim -bdir buildDir -info-dir buildDir -simdir buildDir -vdir buildDir -aggressive-conditions TestBench.bsv
 
 mux: compile
-	bsc -sim -e mkTbMux -bdir buildDir -info-dir buildDir -simdir buildDir -o buildDir/simMux buildDir/*.ba
-	./buildDir/simMux
+	bsc -sim -e mkTbMux -bdir buildDir -info-dir buildDir -simdir buildDir -o simMux buildDir/*.ba
 
 muxsimple: compile
-	bsc -sim -e mkTbMuxSimple -bdir buildDir -info-dir buildDir -simdir buildDir -o buildDir/simMuxSimple buildDir/*.ba
-	./buildDir/simMuxSimple
+	bsc -sim -e mkTbMuxSimple -bdir buildDir -info-dir buildDir -simdir buildDir -o simMuxSimple buildDir/*.ba
 
 rca: compile
-	bsc -sim -e mkTbRCA -bdir buildDir -info-dir buildDir -simdir buildDir -o buildDir/simRca buildDir/*.ba
-	./buildDir/simRca
+	bsc -sim -e mkTbRCA -bdir buildDir -info-dir buildDir -simdir buildDir -o simRca buildDir/*.ba
 
 rcasimple: compile
-	bsc -sim -e mkTbRCASimple -bdir buildDir -info-dir buildDir -simdir buildDir -o buildDir/simRcaSimple buildDir/*.ba
-	./buildDir/simRcaSimple
+	bsc -sim -e mkTbRCASimple -bdir buildDir -info-dir buildDir -simdir buildDir -o simRcaSimple buildDir/*.ba
 
 csa: compile
-	bsc -sim -e mkTbCSA -bdir buildDir -info-dir buildDir -simdir buildDir -o buildDir/simCsa buildDir/*.ba
-	./buildDir/simCsa
+	bsc -sim -e mkTbCSA -bdir buildDir -info-dir buildDir -simdir buildDir -o simCsa buildDir/*.ba
 
 csasimple: compile
-	bsc -sim -e mkTbCSASimple -bdir buildDir -info-dir buildDir -simdir buildDir -o buildDir/simCsaSimple buildDir/*.ba
-	./buildDir/simCsaSimple
+	bsc -sim -e mkTbCSASimple -bdir buildDir -info-dir buildDir -simdir buildDir -o simCsaSimple buildDir/*.ba
 
-bs: compile
-	bsc -sim -e mkTbBS -bdir buildDir -info-dir buildDir -simdir buildDir -o buildDir/simBs buildDir/*.ba
-	./buildDir/simBs
-
-all: mux muxsimple rca rcasimple csa csasimple bs
+all: mux muxsimple rca rcasimple csa csasimple
 
 clean:
-	rm -rf buildDir sim* *.vcd
+	rm -rf buildDir sim*
 
 .PHONY: clean all add compile
 .DEFAULT_GOAL := all
