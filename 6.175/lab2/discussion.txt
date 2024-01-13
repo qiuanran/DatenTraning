@@ -1,19 +1,29 @@
-1.
+1. Yes
 
-2.
+2. 
+(1) errors : Bit vector of unknown size
+(2) The second operand of mkTbMulFunction does not require two function definitions because the compiler has automatic inference capabilities, allowing it to determine the bit width of the second parameter based on the type specified in the first operand.
 
-3.
+
+3. unsigned
 
 4.
 Current Bits | Previous Bit | Original Booth Encoding | Radix-4 Booth Encoding
 -------------+--------------+-------------------------+-----------------------
-    00       |      0       |                         |           
-    00       |      1       |                         |           
+    00       |      0       |           00            |         00  
+    00       |      1       |           0+            |         0+  
     01       |      0       |           +-            |         0+
-    01       |      1       |                         |           
-    10       |      0       |                         |           
-    10       |      1       |                         |           
-    11       |      0       |                         |           
-    11       |      1       |                         |           
+    01       |      1       |           +0            |         +0  
+    10       |      0       |           -0            |         -0  
+    10       |      1       |           -+            |         0-
+    11       |      0       |           0-            |         0-
+    11       |      1       |           00            |         00
 
 5.
+In the radix-8 Booth multiplier, each step would have eight possible encodings: 000, 001, 010, 011, 100, 101, 110, and 111. Each of these encodings would require a different set of partial product calculations. Therefore, it would not be possible to simplify all encodings to have only one non-zero symbol.
+
+Despite this limitation, a radix-8 Booth multiplier can still be useful in certain scenarios. It can provide a faster multiplication operation compared to a radix-4 Booth multiplier as it performs three steps in a single step. This can be advantageous in computational tasks that require a large number of multiplication operations, such as in digital signal processing or cryptography.
+
+However, it is important to consider the trade-off between speed and resource utilization. The radix-8 Booth multiplier requires more logic resources compared to the radix-4 Booth multiplier due to the increased number of partial products and encoding possibilities. Therefore, it may not be suitable for use in resource-constrained situations where minimizing logic resources is crucial.
+
+6. 4h
